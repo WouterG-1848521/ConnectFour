@@ -1,3 +1,5 @@
+# Play the game agains the computer or let the computer play against the computer.
+
 from connectfour import Game
 import argparse
 
