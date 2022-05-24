@@ -89,7 +89,7 @@ model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-history = model.fit(train_features,train_labels, epochs=5)
+history = model.fit(train_features,train_labels, epochs=10)
 
 print(history.history)
 
