@@ -2,7 +2,6 @@ from neural_nets.network import Network
 import tensorflow as tf
 import pandas as pd
 import numpy as np
-from utils import convert_probablities_array_to_move
 
 
 class testNet(Network):
@@ -44,13 +43,11 @@ class testNet(Network):
 
         predict = self.model.predict(np.array([board.flatten(),board.flatten()]))
         print(predict)
-        convert = convert_probablities_array_to_move(predict)
-        print("Convert to move:", convert)
 
         print(self.name + ": done predicting move")
         print("--------------------")
 
-        return convert[0]
+        return predict
 
 
     # EVALUATE MODEL

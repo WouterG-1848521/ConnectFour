@@ -1,5 +1,6 @@
 import connectfour as connectfour
 from enum import Enum
+import numpy as np
 from neural_nets.testnet import testNet
 
 # Add names of networks here (DON'T FORGET TO IMPORT THEM)
@@ -54,8 +55,24 @@ class Player2:
         # If network is chosen, try to use it
         else:
             try:
-                predict = self.net.predict(self.game.board)
-                return predict
+                # Predict probabilities
+                prob = self.net.predict(self.game.board)[0]
+                # Convert prob to moves + order from highest to lowest prob
+                order = np.flipud(np.argsort(prob))
+                best = order[0]
+
+                # Check if valid move
+                index = 1
+                while (not self.game.is_legal_move(best)):
+                    best = order[index]
+                    index += 1
+
+                    if (index >= len(order)):
+                        raise ValueError("No move available") # is normally impossible since game checks on this
+                
+                # Return best option
+                return best
+
             except Exception as e:
                 print("Exception caught:", e)
                 raise ValueError("Something went wrong while using chosen network: " + self.network.name)
