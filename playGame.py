@@ -48,10 +48,14 @@ def playGame():
 
     # play connect four against the computer
     while not game_done:
+        # Show board
+        printBoard()
+
+        # Check of game has ended
         if game.check_status() is not None:
             print("Game is over!")
-            print(np.flip(game.board, 0))
             break
+
         # If game still going, move
         move()
                 
@@ -70,9 +74,6 @@ def printBoard():
 
 # DO A MOVE
 def move():
-    # Show board
-    printBoard()
-
     # If player is person, ask input
     if (currentPlayer == player_1 and human_playing):
         print("Player 1, please enter a column number: ")

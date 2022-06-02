@@ -1,8 +1,13 @@
+import tensorflow as tf
+
+
 class Network():
     name = "[name of network]"
+    model = None
 
     def __init__(self, name):
         self.name = name
+        self.model = tf.keras.models.Sequential()
 
 
     def train(self):
@@ -11,3 +16,7 @@ class Network():
 
     def predict(self):
         raise NotImplementedError("Method 'predict()' not implemented in " + self.name)
+
+
+    def evaluate(self):
+        raise NotImplementedError("Method 'evaluate()' not implemented in " + self.name)

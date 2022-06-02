@@ -32,6 +32,12 @@ class Player2:
             try:
                 classname = globals()[self.network.name]
                 self.net = classname()
+
+                # Train the network
+                self.net.train()
+                # Evaluate network
+                self.net.evaluate()
+
             except Exception as e:
                 print("Exception caught:", e)
                 raise ValueError("Something went wrong while initializing chosen network " + self.network.name)
@@ -48,7 +54,8 @@ class Player2:
         # If network is chosen, try to use it
         else:
             try:
-                self.net.predict()
+                predict = self.net.predict(self.game.board)
+                return predict
             except Exception as e:
                 print("Exception caught:", e)
                 raise ValueError("Something went wrong while using chosen network: " + self.network.name)
