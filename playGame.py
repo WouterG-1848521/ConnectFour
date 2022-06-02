@@ -77,10 +77,10 @@ def move():
     # If player is person, ask input
     if (currentPlayer == player_1 and human_playing):
         print("Player 1, please enter a column number: ")
-        column = int(input())
+        column = askUserCol()
         while (not checkMove(column)):
             print("Invalid move, try again")
-            column = int(input())
+            column = askUserCol()
         game.play_move(currentPlayer, column)
 
     # Computer move
@@ -101,6 +101,15 @@ def move():
 
     # After move, change player
     changePlayer()
+
+
+# ASK USER TO INPUT COL
+def askUserCol():
+    inp = input()
+    while (not inp.isdigit()):
+        print("No positive integer, try again")
+        inp = input()
+    return int(inp)
 
 
 # CHECK IF PLAYER INPUT IS LEGAL
