@@ -5,6 +5,7 @@ from player2 import Player2, Nets
 import argparse
 import numpy as np
 
+
 # INIT ARGS
 parser = argparse.ArgumentParser(description='Play a game of connect four')
 parser.add_argument('--second', metavar='S', nargs='?', default=False, const=True,
@@ -29,7 +30,7 @@ def initGame():
 
     try:
         game = Game()
-        network = Player2(game = game, networkName = Nets.none) # Change networkName to name of network to be used, none == random move
+        network = Player2(game = game, networkName = Nets.testNet) # Change networkName to name of network to be used, none == random move
     except Exception as e:
         print(e)
         exit()

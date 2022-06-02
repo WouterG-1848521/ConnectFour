@@ -1,34 +1,54 @@
-import connectfour
+import connectfour as connectfour
 from enum import Enum
-import numpy as np
+from neural_nets.testnet import testNet
 
-# Add names of networks here
+# Add names of networks here (DON'T FORGET TO IMPORT THEM)
 class Nets(Enum):
     none = 1
-    simpleNetwork = 2
+    testNet = 2
 
 
 class Player2:
-    networkName = Nets.none
+    network = Nets.none
+    net = None
     game = None
 
     def __init__(self, game, networkName = Nets.none):
-        self.networkName = networkName
-
+        # Make sure Game is correct
         if (game.__class__ != connectfour.Game):
             print(game.__class__)
-            raise ValueError('Game not class Game')
+            raise ValueError('Game is not class Game')
         else:
             self.game = game
 
+        # Save network's name
+        if (isinstance(networkName, Nets)):
+            self.network = networkName
+        else:
+            raise ValueError("NetworkName '" + str(networkName) + "' not type from enum 'Nets'")
+
+        # Init Network
+        if (not self.network == Nets.none):
+            try:
+                classname = globals()[self.network.name]
+                self.net = classname()
+            except Exception as e:
+                print("Exception caught:", e)
+                raise ValueError("Something went wrong while initializing chosen network " + self.network.name)
+
+        
+
     # GET MOVE BASED ON THE CHOSEN NETWORK
     def getMove(self):
-        if (self.networkName == Nets.none):
+        # If no network is chosen, use random action
+        if (self.network == Nets.none):
             print("Calculating random move")
             return self.game.random_action(legal_only = True)
 
-        elif (self.networkName == Nets.simpleNetwork):
-            print("Calculating move in simpleNetwork")
-
+        # If network is chosen, try to use it
         else:
-            raise ValueError("Something went wrong while identifying chosen network")
+            try:
+                self.net.predict()
+            except Exception as e:
+                print("Exception caught:", e)
+                raise ValueError("Something went wrong while using chosen network: " + self.network.name)
