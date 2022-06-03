@@ -1,6 +1,6 @@
 # Play the game against the computer or let the computer play against the computer.
 
-from connectfour import Game
+from connectfour import Game, starting_player
 from player2 import Player2, Nets
 import argparse
 import numpy as np
@@ -8,6 +8,8 @@ import numpy as np
 
 # INIT ARGS
 parser = argparse.ArgumentParser(description='Play a game of connect four')
+parser.add_argument('--first', metavar='S', nargs='?', default=False, const=True,
+                    help='Use this if you want to go first')
 parser.add_argument('--second', metavar='S', nargs='?', default=False, const=True,
                     help='Use this if you want to go second')
 parser.add_argument('--aiRandom', metavar='A', nargs='?', default=False, const=True,
@@ -16,9 +18,9 @@ args = parser.parse_args()
 
 # INIT GLOBALS
 game_done = False
-player_1 = 1
-player_2 = -1
-currentPlayer = 1
+player_1 = -1
+player_2 = 1
+currentPlayer = starting_player()
 human_playing = True
 game = None
 network = None
@@ -26,7 +28,7 @@ network = None
 
 # INIT GAME
 def initGame():
-    global game, network
+    global game, network, currentPlayer
 
     try:
         game = Game()
@@ -41,10 +43,17 @@ def playGame():
     global currentPlayer, human_playing
 
     print("Welcome to Connect Four!")
-    if args.second:
+    if args.first:
         currentPlayer = -1
+    if args.second:
+        currentPlayer = 1
     if args.aiRandom:
         human_playing = False
+
+    if (currentPlayer == player_1):
+        print("Player 1 may play first")
+    else:
+        print("Player 2 may play first")
 
     # play connect four against the computer
     while not game_done:

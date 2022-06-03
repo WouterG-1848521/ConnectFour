@@ -1,0 +1,13 @@
+### REQUIREMENTS ###
+
+# extern libraries
+numpy,
+pandas,
+tensorflow,
+
+# Basic libraries
+argparse,
+enum,
+random,
+copy,
+sys
