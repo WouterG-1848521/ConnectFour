@@ -5,9 +5,11 @@ class Network():
     name = "[name of network]"
     model = None
 
-    def __init__(self, name):
+    def __init__(self, name, initSequential = True):
         self.name = name
-        self.model = tf.keras.models.Sequential()
+
+        if (initSequential == True):
+            self.model = tf.keras.models.Sequential()
 
 
     def train(self):
