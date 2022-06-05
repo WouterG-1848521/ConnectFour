@@ -84,25 +84,29 @@ def printBoard():
 # DO A MOVE
 def move():
     # If player is person, ask input
-    if (currentPlayer == player_1 and human_playing):
-        print("Player 1, please enter a column number: ")
-        column = askUserCol()
-        while (not checkMove(column)):
-            print("Invalid move, try again")
+    if (currentPlayer == player_1):
+        if (human_playing):
+            print("Player 1, please enter a column number: ")
             column = askUserCol()
+            while (not checkMove(column)):
+                print("Invalid move, try again")
+                column = askUserCol()
+        # Random AI
+        else: 
+            print("Computer 1 is playing...")
+            column = game.random_action()
+            print("Computer 1 played:", column)
+
         game.play_move(currentPlayer, column)
 
     # Computer move
     else:
-        if (currentPlayer == player_1):
-            print("Computer 1 is playing...")
-        else:
-            print("Computer 2 is playing...")
+        print("Computer 2 is playing...")
 
         # Let computer do move
         try:
             move = network.getMove()
-            print("Computer played:", move)
+            print("Computer 2 played:", move)
             game.play_move(currentPlayer, move)
         except Exception as e:
             print(e)
