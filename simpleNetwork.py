@@ -23,7 +23,7 @@ train_labels = []
 test_features = []
 test_labels = []
 
-total_data = 44350
+total_data = 77451
 amount_of_train_data = int(total_data / 2) 
 
 # the first N rows are used for training
@@ -78,10 +78,10 @@ print("\n\n\n")
 
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.Flatten())    # change the 2d board to a 1D array
-model.add(tf.keras.layers.Dense(128, activation=tf.nn.relu))  # tf.nn.relu kinde as default activation
-model.add(tf.keras.layers.Dense(128, activation=tf.nn.relu))
-model.add(tf.keras.layers.Dense(128, activation=tf.nn.relu))    # testing with more layers => best 5
-model.add(tf.keras.layers.Dense(128, activation=tf.nn.relu))
+model.add(tf.keras.layers.Dense(128, activation=tf.nn.elu))  # tf.nn.relu kinde as default activation
+model.add(tf.keras.layers.Dense(128, activation=tf.nn.elu))
+model.add(tf.keras.layers.Dense(128, activation=tf.nn.elu))    # testing with more layers => best 5
+model.add(tf.keras.layers.Dense(128, activation=tf.nn.elu))
 model.add(tf.keras.layers.Dense(128, activation=tf.nn.relu))
 model.add(tf.keras.layers.Dense(7, activation=tf.nn.softmax))
 

@@ -76,10 +76,22 @@ print("\n\n\n")
 
 # idee : bord als input => move als output (deze zou de beste move moeten worden), kan gecheckt worden via smart move van game class
 
-model = tf.keras.models.Sequential()
-model.add(tf.keras.layers.Flatten())    # change the 2d board to a 1D array
-model.add(tf.keras.layers.SimpleRNN(128, activation=tf.nn.relu))  # tf.nn.relu kinde as default activation
-model.add(tf.keras.layers.SimpleRNN(7, activation=tf.nn.softmax))
+# model = tf.keras.models.Sequential()
+# model.add(tf.keras.layers.Flatten())    # change the 2d board to a 1D array
+# model.add(tf.keras.layers.SimpleRNN(64, activation=tf.nn.relu, input_shape=(None, 42)))
+# model.add(tf.keras.layers.Dense(7, activation=tf.nn.softmax))
+
+# model.compile(optimizer='adam',
+#               loss='sparse_categorical_crossentropy',
+#               metrics=['accuracy'])
+
+model = tf.keras.Sequential()
+# model.add(tf.keras.layers.Flatten()) 
+model.add(tf.keras.layers.SimpleRNN(64, input_shape=(None, 42)))
+model.add(tf.keras.layers.Dense(10))
+print(model.summary())
+
+# quit()
 
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
