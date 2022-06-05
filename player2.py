@@ -17,8 +17,7 @@ class Player2:
     def __init__(self, game, networkName = Nets.none):
         # Make sure Game is correct
         if (game.__class__ != connectfour.Game):
-            print(game.__class__)
-            raise ValueError('Game is not class Game')
+            raise ValueError('Game is not class Game, but ' + str(game.__class__))
         else:
             self.game = game
 
