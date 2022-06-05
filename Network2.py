@@ -1,7 +1,9 @@
+from cProfile import label
 import tensorflow as tf
 
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 from convert import convert_games_to_setup
 from utils import convert_probablities_array_to_move
@@ -47,38 +49,71 @@ train_labels = np.array(train_labels)
 test_features = np.array(test_features)
 test_labels = np.array(test_labels)
 
-# for i in range(len(train_features)):
-#     np.insert(train_features, 0, i)
-# for i in range(len(test_features)):
-#     test_features[i] = [i, test_features[i]]
-# inputs = np.random.random([32, 10, 8]).astype(np.float32)
+train_features = train_features.reshape(len(train_features), 6, 7, 1)
+test_features = test_features.reshape(len(test_features), 6, 7, 1)
 
 print("Done loading data ",train_features.shape, " ", train_labels.shape, " ", test_features.shape, " ", test_labels.shape)
 print("\n\n\n")
 
-# test a Recurrent Neural Network
+# try to use a convulational neural network
+# result
+num_filters = 8
+filter_size = 3
+pool_size = 2
 
-model = tf.keras.Sequential()
-# model.add(tf.keras.layers.Flatten()) 
-model.add(tf.keras.layers.SimpleRNN(64, input_shape=(None, 42)))
-model.add(tf.keras.layers.BatchNormalization())
-model.add(tf.keras.layers.Dense(10))
-# print(model.summary())
-
-# quit()
+model = tf.keras.models.Sequential([
+  tf.keras.layers.Conv2D(num_filters, filter_size, input_shape=(6, 7, 1)),
+  tf.keras.layers.MaxPooling2D(pool_size=pool_size),
+  tf.keras.layers.Flatten(),
+  tf.keras.layers.Dense(7, activation='softmax'),
+])
 
 model.compile(optimizer='adam',
-              loss='sparse_categorical_crossentropy',
+              loss='categorical_crossentropy',
               metrics=['accuracy'])
-# quit()
-history = model.fit(train_features, tf.keras.utils.to_categorical(train_labels), epochs=5)
+
+history = model.fit(
+  train_features,
+  tf.keras.utils.to_categorical(train_labels),
+  epochs=10,
+)
 
 print(history.history)
 
+accuracies = history.history['accuracy']
+losses = history.history['loss']
+epochs = range(len(accuracies))
+
+# show a plot of the accuracies and losses for training and testing
+fig = plt.figure()
+ax1 = fig.add_subplot(221)
+ax2 = fig.add_subplot(222)
+ax1.title.set_text('Accuracy')
+ax2.title.set_text('Loss')
+
+ax1.plot(epochs, accuracies, marker='o', color="b", label="Training accuracy")
+# string = "Testing accuracy: " + str(accuracies[-1])
+# ax1.annotate(string,xy=(len(epochs) / 2,accuracies[0-1] + 0.01))
+ax2.plot(epochs, losses, marker='o', color="g", label="Training loss")
+# string = "Testing loss: " + str(losses[0-1])
+# ax2.annotate(string,xy=(len(epochs) / 2,losses[0-1] + 0.01))
+
+
+
 print("Evaluate on test data")
-results = model.evaluate(test_features, test_labels, batch_size=128)
+results = model.evaluate(test_features, tf.keras.utils.to_categorical(test_labels), batch_size=128)
 print("test loss, test acc:", results)
 
+testaccuracies = [results[1]] * len(accuracies)
+testlosses = [results[0]] * len(accuracies)
+
+ax1.plot(epochs, testaccuracies, color="r", label="Testing accuracy")
+# string = "Testing accuracy: " + str(results[1])
+# ax1.annotate(string,xy=(len(epochs) / 2,testaccuracies[0] + 0.01))
+ax2.plot(epochs, testlosses, color="k", label="Testing loss")
+# string = "Testing loss: " + str(results[0])
+# ax1.annotate(string,xy=(len(epochs) / 2,testlosses[0] + 0.01))
+fig.legend()
 
 # Generate predictions (probabilities -- the output of the last layer)
 # on new data using `predict`
@@ -89,3 +124,4 @@ print("prediction: ", convert_probablities_array_to_move(predictions))
 print("real labels: ", test_labels[:3])
 
 
+plt.show()

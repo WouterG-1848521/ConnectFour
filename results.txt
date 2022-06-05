@@ -1,0 +1,33 @@
+    SIMPLE NETWORK
+ results for 1 layer with different activation functions
+ layer   | accuracy
+ sigmoid | 0.2945
+ relu    | 0.4729
+ softmax | 0.3789
+ tanh    | 0.0.4016
+
+ results for size of layers
+ size     | accuracy
+ 1024     | 0.5171
+ 512      | 0.5151
+ 256      | 0.4980
+ 128      | 0.4843
+ 64       | 0.4623
+ 32       | 0.4448
+ 16       | 0.401
+ 42       | 0.4556 (size of input)
+
+ results when using regulatization
+ type    | accuracy
+ none    | 0.4623 (used size 64 of previous test)
+ l1      | 0.2945
+ l2      | 0.4312
+ l1 + l2 | 0.2945
+ OrthogonalRegularizer | 0.4678 (rows)
+ OrthogonalRegularizer | 0.4704 (columns)
+
+    CONVOLUTIONAL NETWORK
+default convulational network : loss: 1.6744 - accuracy: 0.3672
+    => is a lot worse than the simple network so won't persue further
+
+    
