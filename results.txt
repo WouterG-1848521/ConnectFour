@@ -4,7 +4,7 @@
  sigmoid | 0.2945
  relu    | 0.4729
  softmax | 0.3789
- tanh    | 0.0.4016
+ tanh    | 0.4016
 
  results for size of layers
  size     | accuracy
@@ -30,4 +30,6 @@
 default convulational network : loss: 1.6744 - accuracy: 0.3672
     => is a lot worse than the simple network so won't persue further
 
-    
+    RECURENT NEURAL NETWORK
+default recurrent neural network : loss: 1.8322 - accuracy: 0.2945
+    * the improvements from simple network above didn't change anything
