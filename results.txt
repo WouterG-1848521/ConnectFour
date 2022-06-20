@@ -1,10 +1,14 @@
     SIMPLE NETWORK
  results for 1 layer with different activation functions
- layer   | accuracy
- sigmoid | 0.2945
- relu    | 0.4729
- softmax | 0.3789
- tanh    | 0.4016
+ layer    | accuracy
+ sigmoid  | 0.2945
+ relu     | 0.4729
+ softmax  | 0.3789
+ tanh     | 0.4016
+ softplus | 0.42073
+ softsign | 0.417533
+ selu     | 0.35178
+ elu      | 0.434241
 
  results for size of layers
  size     | accuracy
@@ -18,8 +22,8 @@
  42       | 0.4556 (size of input)
 
  results when using regulatization
- type    | accuracy
- none    | 0.4623 (used size 64 of previous test)
+ type    | accuracy (used size 64 of previous test)
+ none    | 0.4623 
  l1      | 0.2945
  l2      | 0.4312
  l1 + l2 | 0.2945

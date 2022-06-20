@@ -83,13 +83,18 @@ print("\n\n\n")
 # OrthogonalRegularizer | 0.4678 (rows)
 # OrthogonalRegularizer | 0.4704 (columns)
 regularizer = tf.keras.regularizers.OrthogonalRegularizer(factor=0.01, mode="columns")
+# regularizer = tf.keras.regularizers.L1L2(0.01)
 
 # model.add(tf.keras.layers.Dropout(0.25)) # a dropout layer lowers the accurancy
 
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.Flatten())    # change the 2d board to a 1D array
-model.add(tf.keras.layers.Dense(64, activation=tf.nn.relu, kernel_regularizer=regularizer))
-# model.add(tf.keras.layers.Dense(64, activation=tf.nn.relu))
+model.add(tf.keras.layers.Dense(512, activation=tf.nn.relu, kernel_regularizer=regularizer))
+model.add(tf.keras.layers.Dense(512, activation=tf.nn.relu, kernel_regularizer=regularizer))
+model.add(tf.keras.layers.Dense(512, activation=tf.nn.relu, kernel_regularizer=regularizer))
+model.add(tf.keras.layers.Dense(512, activation=tf.nn.relu, kernel_regularizer=regularizer))
+model.add(tf.keras.layers.Dense(512, activation=tf.nn.relu, kernel_regularizer=regularizer))
+# model.add(tf.keras.layers.Dense(128, activation=tf.nn.relu))
 model.add(tf.keras.layers.Dense(7, activation=tf.nn.softmax))
 
 model.compile(optimizer='adam',
@@ -100,7 +105,7 @@ early_stopping_monitor = tf.keras.callbacks.EarlyStopping(monitor="accuracy",pat
 early_stopping_monitor2 = tf.keras.callbacks.EarlyStopping(monitor="loss",patience=10, min_delta=0.001)
 history = model.fit(train_features,train_labels, epochs=10, callbacks=[early_stopping_monitor,early_stopping_monitor2])
 
-print(history.history)
+# print(history.history)
 
 accuracies = history.history['accuracy']
 losses = history.history['loss']
@@ -141,9 +146,9 @@ fig.legend()
 # on new data using `predict`
 print("Generate predictions for 3 samples")
 predictions = model.predict(test_features[:3])
-print("predictions shape:", predictions.shape)
-print("prediction: ", convert_probablities_array_to_move(predictions))
-print("real labels: ", test_labels[:3])
+# print("predictions shape:", predictions.shape)
+# print("prediction: ", convert_probablities_array_to_move(predictions))
+# print("real labels: ", test_labels[:3])
 
 
 plt.show()

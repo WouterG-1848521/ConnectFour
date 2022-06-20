@@ -17,7 +17,7 @@ col_name = ['bestMove', '00','01','02','03','04','05','06',
                         '40','41','42','43','44','45','46',    
                         '50','51','52','53','54','55','56',] # (row, column)
 
-with open("ProcessedData.csv", 'w', newline='') as file:
+with open("ProcessedData_withPlayer2.csv", 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(col_name)
     data = read_games_own(fname)
@@ -29,6 +29,7 @@ with open("ProcessedData.csv", 'w', newline='') as file:
             if (counter % 100 == 0):
                 print("processed:", counter)
             counter += 1
+            
 print("done")
 quit()
 X = convert_games_to_setup(fname)

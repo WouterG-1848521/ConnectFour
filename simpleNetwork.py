@@ -78,10 +78,10 @@ print("\n\n\n")
 
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.Flatten())    # change the 2d board to a 1D array
-model.add(tf.keras.layers.Dense(128, activation=tf.nn.elu))  # tf.nn.relu kinde as default activation
-model.add(tf.keras.layers.Dense(128, activation=tf.nn.elu))
-model.add(tf.keras.layers.Dense(128, activation=tf.nn.elu))    # testing with more layers => best 5
-model.add(tf.keras.layers.Dense(128, activation=tf.nn.elu))
+# model.add(tf.keras.layers.Dense(128, activation=tf.nn.elu))  # tf.nn.relu kinde as default activation
+# model.add(tf.keras.layers.Dense(128, activation=tf.nn.elu))
+# model.add(tf.keras.layers.Dense(128, activation=tf.nn.elu))    # testing with more layers => best 5
+# model.add(tf.keras.layers.Dense(128, activation=tf.nn.elu))
 model.add(tf.keras.layers.Dense(128, activation=tf.nn.relu))
 model.add(tf.keras.layers.Dense(7, activation=tf.nn.softmax))
 
@@ -91,17 +91,17 @@ model.compile(optimizer='adam',
 
 history = model.fit(train_features,train_labels, epochs=10)
 
-print(history.history)
+# print(history.history)
 
-print("Evaluate on test data")
+print("\nEvaluate on test data")
 results = model.evaluate(test_features, test_labels, batch_size=128)
 print("test loss, test acc:", results)
 
 
 # Generate predictions (probabilities -- the output of the last layer)
 # on new data using `predict`
-print("Generate predictions for 3 samples")
-predictions = model.predict(test_features[:3])
+print("Generate predictions for all samples")
+predictions = model.predict(test_features)
 print("predictions shape:", predictions.shape)
 print("prediction: ", convert_probablities_array_to_move(predictions))
 print("real labels: ", test_labels[:3])

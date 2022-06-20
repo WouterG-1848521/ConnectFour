@@ -22,25 +22,25 @@ def read_games(fname):
         yield as_board(game)
 
 # own conversion to : [bestmove, boardstate]
-def create_boards_with_moves(moves):
-    game = Game()
-
-    set = []
-    for _, i in moves.iterrows():
-        idx, player, move, winner = i['idx'], i['player'], i['move'], i['winner']
-        game.play_move(player, move)
-        guessDepth = 10
-        procents = game.winning(player, n=guessDepth)
-        bestMove = (0, procents[0])
-        for i in range(1,len(procents)):
-            if procents[i] > bestMove[1]:
-                bestMove = (i, procents[i])
-        # print("board:", game.board)
-        # print("has best move:", bestMove)
-        total = [bestMove[0]]
-        total += game.board.reshape((-1)).tolist()
-        set.append(total)
-        yield(total)
+# def create_boards_with_moves(moves):
+#     game = Game()
+#
+#     set = []
+#     for _, i in moves.iterrows():
+#         idx, player, move, winner = i['idx'], i['player'], i['move'], i['winner']
+#         game.play_move(player, move)
+#         guessDepth = 10
+#         procents = game.winning(player, n=guessDepth)
+#         bestMove = (0, procents[0])
+#         for i in range(1,len(procents)):
+#             if procents[i] > bestMove[1]:
+#                 bestMove = (i, procents[i])
+#         # print("board:", game.board)
+#         # print("has best move:", bestMove)
+#         total = [bestMove[0]]
+#         total += game.board.reshape((-1)).tolist()
+#         set.append(total)
+#         yield(total)
         # set.append([bestMove[0], game.board.reshape((-1))])
     # return set
 def read_games_own(fname):
@@ -71,6 +71,7 @@ def create_boards_with_moves(moves):
         # print("has best move:", bestMove)
         total = [bestMove[0]]
         total += game.board.reshape((-1)).tolist()
+        total += [player]
         yield total
 def convert_games_to_setup(fname):
     X = pd.read_csv(fname, names=["game", "idx", "player", "move", "winner"])
