@@ -81,3 +81,6 @@ class Player2:
             except Exception as e:
                 print("Exception caught:", e)
                 raise ValueError("Something went wrong while using chosen network: " + self.network.name)
+
+    def setGame(self, game):
+        self.game = game
