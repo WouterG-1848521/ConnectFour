@@ -1,12 +1,16 @@
 import connectfour as connectfour
 from enum import Enum
 import numpy as np
+from neural_nets.optimizednet import optimizedNet
+from neural_nets.othertrainingnet import othertrainingNet
 from neural_nets.testnet import testNet
 
 # Add names of networks here (DON'T FORGET TO IMPORT THEM)
 class Nets(Enum):
     none = 1
     testNet = 2
+    optimizedNet = 3
+    othertrainingNet = 4
 
 
 class Player2:
