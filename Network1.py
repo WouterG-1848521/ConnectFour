@@ -26,6 +26,7 @@ test_features = []
 test_labels = []
 
 total_data = 77451
+total_data = 6825 # compare with the amount of data of the withplayer set
 amount_of_train_data = int(total_data / 4) * 3 
 
 # the first N rows are used for training
