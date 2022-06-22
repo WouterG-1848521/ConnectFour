@@ -12,6 +12,7 @@ class Nets(Enum):
     optimizedNet = 3
     othertrainingNet = 4
     rnnNet = 5
+    cnnNet = 6
 
 
 class Player2:
