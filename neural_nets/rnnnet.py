@@ -90,7 +90,6 @@ class rnnNet(Network):
 
     # ADD DIFFERENT LAYERS TO MODEL
     def addLayers(self):
-        self.model.add(tf.keras.layers.Flatten()) # change the 2d board to a 1D array
 
         regularizer = tf.keras.regularizers.OrthogonalRegularizer(factor=0.01, mode="columns")
 
