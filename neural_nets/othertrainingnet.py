@@ -32,7 +32,7 @@ class othertrainingNet(Network):
         
         early_stopping_monitor = tf.keras.callbacks.EarlyStopping(monitor="accuracy",patience=10, min_delta=0.001)
         early_stopping_monitor2 = tf.keras.callbacks.EarlyStopping(monitor="loss",patience=10, min_delta=0.001)
-        self.model.fit(self.train_features, self.train_labels, epochs=10, callbacks=[early_stopping_monitor,early_stopping_monitor2])
+        self.model.fit(self.train_features, self.train_labels, epochs=1, callbacks=[early_stopping_monitor,early_stopping_monitor2])
 
 
         print(self.name + ": done training data")
@@ -72,16 +72,16 @@ class othertrainingNet(Network):
                                 '20','21','22','23','24','25','26',
                                 '30','31','32','33','34','35','36',
                                 '40','41','42','43','44','45','46',    
-                                '50','51','52','53','54','55','56',]
+                                '50','51','52','53','54','55','56', 'player']
         
-        total_data = 54771
+        total_data = 54770
         amount_of_train_data = int(total_data / 4) * 3 
 
         data = pd.read_csv("data/ProcessedData_withPlayer_54000.csv", names = headers)
         self.train_labels = np.array(data["bestMove"][:amount_of_train_data])
-        self.train_features = np.array(data[headers[1:]][:amount_of_train_data])
+        self.train_features = np.array(data[headers[1:-1]][:amount_of_train_data])
         self.test_labels = np.array(data["bestMove"][amount_of_train_data: ])
-        self.test_features = np.array(data[headers[1:]][amount_of_train_data: ])
+        self.test_features = np.array(data[headers[1:-1]][amount_of_train_data: ])
 
 
     # ADD DIFFERENT LAYERS TO MODEL
