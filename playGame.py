@@ -32,7 +32,7 @@ def initGame():
 
     try:
         game = Game()
-        network = Player2(game = game, networkName = Nets.optimizedNet) # Change networkName to name of network to be used, none == random move
+        network = Player2(game = game, networkName = Nets.othertrainingNet) # Change networkName to name of network to be used, none == random move
     except Exception as e:
         print(e)
         exit()

@@ -77,7 +77,7 @@ class othertrainingNet(Network):
         total_data = 54771
         amount_of_train_data = int(total_data / 4) * 3 
 
-        data = pd.read_csv("data/ProcessedData withPlayer_54000.csv", names = headers)
+        data = pd.read_csv("data/ProcessedData_withPlayer_54000.csv", names = headers)
         self.train_labels = np.array(data["bestMove"][:amount_of_train_data])
         self.train_features = np.array(data[headers[1:]][:amount_of_train_data])
         self.test_labels = np.array(data["bestMove"][amount_of_train_data: ])
