@@ -74,10 +74,10 @@ class othertrainingNet(Network):
                                 '40','41','42','43','44','45','46',    
                                 '50','51','52','53','54','55','56', 'player']
         
-        total_data = 54770
+        total_data = 80168
         amount_of_train_data = int(total_data / 4) * 3 
 
-        data = pd.read_csv("data/ProcessedData_withPlayer_54000.csv", names = headers)
+        data = pd.read_csv("data/ProcessedData_withPlayer.csv", names = headers)
         self.train_labels = np.array(data["bestMove"][:amount_of_train_data])
         self.train_features = np.array(data[headers[1:]][:amount_of_train_data])
         self.test_labels = np.array(data["bestMove"][amount_of_train_data: ])
