@@ -10,7 +10,7 @@ from utils import convert_probablities_array_to_move
 
 print("\n\n\n")
 
-file_name = "ProcessedData_withPlayer_54000.csv"
+file_name = "ProcessedData_withPlayer2.csv"
 col_name = ['bestMove', '00','01','02','03','04','05','06',
                         '10','11','12','13','14','15','16',
                         '20','21','22','23','24','25','26',
@@ -26,7 +26,7 @@ test_features = []
 test_labels = []
 
 total_data = 6825
-total_data = 54771
+total_data = 80169
 amount_of_train_data = int(total_data / 4) * 3 
 
 # the first N rows are used for training
