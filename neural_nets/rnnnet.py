@@ -11,7 +11,7 @@ class rnnNet(Network):
     test_features = []
     
     def __init__(self):
-        super().__init__("testNet")
+        super().__init__("rnnNet")
 
         # init train and testdata
         self.initData()
